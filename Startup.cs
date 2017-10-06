@@ -24,8 +24,8 @@ namespace FacturasOnline
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddDbContext<FODbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
+            services.AddMvc();          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
