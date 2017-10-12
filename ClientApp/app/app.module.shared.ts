@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service.service';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error-handler';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,8 @@ Raven
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler},
+        AuthService,
+        
     ],
     imports: [
         CommonModule,

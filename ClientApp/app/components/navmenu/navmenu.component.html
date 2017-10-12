@@ -17,17 +17,20 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
+                <li [routerLinkActive]="['link-active']" style="cursor:pointer">
+                    <a id="login" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">
                         <span class='glyphicon glyphicon-user'></span> Entrar
                     </a>
+                    <a (click)="auth.logout()" *ngIf="auth.isAuthenticated()">
+                        <span class='glyphicon glyphicon-user'></span> Salir
+                    </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="auth.isAuthenticated()" style="cursor:pointer">
                     <a [routerLink]="['/clientes']">
                         <span class='glyphicon glyphicon-th-list'></span> Clientes
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="auth.isAuthenticated()" style="cursor:pointer">
                     <a [routerLink]="['/facturas']">
                         <span class='glyphicon glyphicon-th-list'></span> Mis Facturas
                     </a>
