@@ -10,17 +10,16 @@ import * as auth0 from 'auth0-js';
 export class AuthService {
   userProfile: any;
 
-  constructor(public router: Router) {}
-
-   webAuth = new auth0.WebAuth({
+  auth0 = new auth0.WebAuth({
     clientID: 'r1DarWcFRzP5uSHfQGSZvUXxPc0ATK0f',
     domain: 'vegaproyecto.auth0.com',
     responseType: 'token id_token',
     audience: 'https://api.facturasonline.com.do',
     redirectUri: 'http://localhost:5000/callback',      
-    scope: 'openid profile email',
+    scope: 'openid profile email'
   });
 
+  constructor(public router: Router) {}
 
   public isInRole(roleName: any) {
     var roles = localStorage.getItem('roles')
@@ -37,7 +36,7 @@ export class AuthService {
     }
   
     const self = this;
-    this.webAuth.client.userInfo(accessToken, (err, profile) => {
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
       }
@@ -47,17 +46,16 @@ export class AuthService {
 
     // ...
     public handleAuthentication(): void {
-      this.webAuth.parseHash((err, authResult) => {
-        debugger;
+      this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
           window.location.hash = '';
           this.setSession(authResult);
           
-          // var jwtHelper = new JwtHelper();
-          // var decodedToken = jwtHelper.decodeToken(authResult.accessToken)
-          // var roles = decodedToken['https://vega.com/roles']
-          // //set roles user to cache
-          // localStorage.setItem('roles', roles);
+          //var jwtHelper = new JwtHelper();
+          //var decodedToken = jwtHelper.decodeToken(authResult.accessToken)
+          //var roles = decodedToken['https://vega.com/roles']
+          //set roles user to cache
+          //localStorage.setItem('roles', roles);
 
           this.router.navigate(['/home']);
         } else if (err) {
@@ -89,8 +87,10 @@ export class AuthService {
     }
   
     public isAuthenticated(): boolean {
+
       // Check whether the current time is past the
       // access token's expiry time
+      console.log('Authenticated');
       var expireAtString = localStorage.getItem('expires_at');
       if(expireAtString)
         var expiresAt = JSON.parse(expireAtString);
@@ -99,14 +99,14 @@ export class AuthService {
     }
 
   public login(): void {
-
-    this.webAuth.authorize({
+    console.log("Login..")
+    this.auth0.authorize({
       clientID: 'r1DarWcFRzP5uSHfQGSZvUXxPc0ATK0f',
       domain: 'vegaproyecto.auth0.com',
       responseType: 'token id_token',
       audience: 'https://api.facturasonline.com.do',
       redirectUri: 'http://localhost:5000/callback',      
-      scope: 'openid profile email',
+      scope: 'openid profile email'
     });
   }
 

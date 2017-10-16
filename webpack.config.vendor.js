@@ -9,16 +9,11 @@ const treeShakableModules = [
     '@angular/core',
     '@angular/forms',
     '@angular/http',
+    'angular2-jwt',
+    'auth0-lock',
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
-    'angular2-jwt',
-    'auth0-lock',
-    'auth0-js',
-    'ng2-toasty',
-    'ng2-toasty/bundles/style-bootstrap.css',
-    'font-awesome/css/font-awesome.css',
-    'raven-js',
     'zone.js',
 ];
 const nonTreeShakableModules = [

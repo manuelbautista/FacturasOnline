@@ -1,6 +1,4 @@
-import { AuthService } from './services/auth.service.service';
-import { ErrorHandler } from '@angular/core';
-import { AppErrorHandler } from './app.error-handler';
+import { AuthService } from './auth.service.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,14 +10,6 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { ClientesComponent } from './components/clientes/clientes.component';
-import { FacturasComponent } from './components/facturas/facturas.component';
-import { ToastyModule } from 'ng2-toasty';
-import * as Raven from 'raven-js';
-
-Raven
-.config('https://de26a9be61604d0d93dfe0dc272f2d02@sentry.io/227746')
-.install();
 
 @NgModule({
     declarations: [
@@ -27,26 +17,20 @@ Raven
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent,
-        ClientesComponent,
-        FacturasComponent
+        HomeComponent
     ],
     providers: [
-        { provide: ErrorHandler, useClass: AppErrorHandler},
-        AuthService,
-        
+        AuthService
     ],
     imports: [
         CommonModule,
         HttpModule,
-        ToastyModule.forRoot(),
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'login', component: CounterComponent },
-            { path: 'clientes', component: ClientesComponent },
-            { path: 'facturas', component: FacturasComponent },
+            { path: 'counter', component: CounterComponent },
+            { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
